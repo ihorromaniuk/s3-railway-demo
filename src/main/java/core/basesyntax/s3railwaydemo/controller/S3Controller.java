@@ -1,6 +1,7 @@
 package core.basesyntax.s3railwaydemo.controller;
 
 import core.basesyntax.s3railwaydemo.dto.ItemAddedResponse;
+import core.basesyntax.s3railwaydemo.dto.ItemPutUrl;
 import core.basesyntax.s3railwaydemo.dto.ItemUrl;
 import core.basesyntax.s3railwaydemo.service.StorageService;
 import java.io.IOException;
@@ -30,6 +31,11 @@ public class S3Controller {
     @GetMapping
     public ResponseEntity<ItemUrl> getUrl(@RequestParam String objectKey) {
         return ResponseEntity.ok(storageService.generateViewablePresignedUrl(objectKey));
+    }
+
+    @GetMapping("/upload-url")
+    public ResponseEntity<ItemPutUrl> getUploadUrl(@RequestParam String objectKey) {
+        return ResponseEntity.ok(storageService.generateUploadablePresignedUrl(objectKey));
     }
 
     @DeleteMapping
